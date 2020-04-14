@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="index.js"></script>
     </head>
 
     <body>
@@ -41,5 +40,66 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+        <script>
+            function login() {
+                var firebaseConfig = {
+                    apiKey: "AIzaSyDd3Atfk2oxlsoGz1Nue8npb5jk_j3lDSA",
+                    authDomain: "phase2challengeandroid.firebaseapp.com",
+                    databaseURL: "https://phase2challengeandroid.firebaseio.com",
+                    projectId: "phase2challengeandroid",
+                    storageBucket: "phase2challengeandroid.appspot.com",
+                    messagingSenderId: "6483909688",
+                    appId: "1:6483909688:web:c48a65f8550571a3645acd"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                console.log("All good");
+
+                document.getElementById("spinner").style.display = "block";
+                document.getElementById("loginBtn").classList.add("disabled");
+
+                firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    alert("error: " + error);
+                    document.getElementById("spinner").style.display = "none";
+                    document.getElementById("loginBtn").classList.remove("disabled");
+                });
+            }
+
+            function initializeApp() {
+                var firebaseConfig = {
+                    apiKey: "AIzaSyDd3Atfk2oxlsoGz1Nue8npb5jk_j3lDSA",
+                    authDomain: "phase2challengeandroid.firebaseapp.com",
+                    databaseURL: "https://phase2challengeandroid.firebaseio.com",
+                    projectId: "phase2challengeandroid",
+                    storageBucket: "phase2challengeandroid.appspot.com",
+                    messagingSenderId: "6483909688",
+                    appId: "1:6483909688:web:c48a65f8550571a3645acd"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+                //Handle Account Status
+                firebase.auth().onAuthStateChanged(user => {
+                    if(user) {
+                        alert("User is logged in already");
+                        window.location = 'moderator.html'; //After successful login, user will be redirected to home.html
+                    } else {
+                        alert("User aint logged in yet");
+                    }
+                });
+            }
+
+            window.onload = function() {
+                initializeApp();
+            };
+        </script>
     </body>
 </html>
