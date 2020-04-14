@@ -8,10 +8,75 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Moderator Dashboard</title>
   </head>
   <body>
     <h1>Hello, world!</h1>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script>
+        var firebaseConfig = {
+                    apiKey: "AIzaSyDd3Atfk2oxlsoGz1Nue8npb5jk_j3lDSA",
+                    authDomain: "phase2challengeandroid.firebaseapp.com",
+                    databaseURL: "https://phase2challengeandroid.firebaseio.com",
+                    projectId: "phase2challengeandroid",
+                    storageBucket: "phase2challengeandroid.appspot.com",
+                    messagingSenderId: "6483909688",
+                    appId: "1:6483909688:web:c48a65f8550571a3645acd"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+        function init() {
+            //Handle Account Status
+            firebase.auth().onAuthStateChanged(user => {
+                    if(user) {
+                        alert("User is logged in already");
+                        //window.location = 'moderator.html'; //After successful login, user will be redirected to home.html
+                        loadCourses();
+                      } else {
+                        alert("User aint logged in yet");
+                    }
+                });
+        }
+          
+        function loadCourses() {
+          var db = firebase.firestore();
+          alert(db);
+        }
+
+        function addQuestion() {
+          var firebaseConfig = {
+                    apiKey: "AIzaSyDd3Atfk2oxlsoGz1Nue8npb5jk_j3lDSA",
+                    authDomain: "phase2challengeandroid.firebaseapp.com",
+                    databaseURL: "https://phase2challengeandroid.firebaseio.com",
+                    projectId: "phase2challengeandroid",
+                    storageBucket: "phase2challengeandroid.appspot.com",
+                    messagingSenderId: "6483909688",
+                    appId: "1:6483909688:web:c48a65f8550571a3645acd"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+        }
+
+        function loadQuestions() {
+          var firebaseConfig = {
+                    apiKey: "AIzaSyDd3Atfk2oxlsoGz1Nue8npb5jk_j3lDSA",
+                    authDomain: "phase2challengeandroid.firebaseapp.com",
+                    databaseURL: "https://phase2challengeandroid.firebaseio.com",
+                    projectId: "phase2challengeandroid",
+                    storageBucket: "phase2challengeandroid.appspot.com",
+                    messagingSenderId: "6483909688",
+                    appId: "1:6483909688:web:c48a65f8550571a3645acd"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+        }
+
+        window.onload = init();
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
